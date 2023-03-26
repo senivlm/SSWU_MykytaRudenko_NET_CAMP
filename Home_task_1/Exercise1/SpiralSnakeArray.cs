@@ -12,12 +12,11 @@ public class SpiralSnakeArray
     public int SizeY { get; }
     public int[,] Array { get; set; }
 
-    public SpiralSnakeArray(int sizeY = 3, int sizeX = 4)
+    public SpiralSnakeArray(int sizeY = 4, int sizeX = 5)
     {
         _sizeX = sizeX;
         _sizeY = sizeY;
         _array = new int[sizeY,sizeX];
-        CreateSnake();
     }
 
     public void CreateSnake()
@@ -54,6 +53,34 @@ public class SpiralSnakeArray
             rowEnd--;
             colStart++;
             colEnd--;
+        }
+    }
+
+    public void SecondVariantCreateSnake()
+    {
+        int value = 1;
+        int counter = 0;
+        int rowStart = 0;
+        int colStart = 0;
+        int rowEnd = _sizeY - 1;
+        int colEnd = _sizeX - 1;
+        int col = 0;
+        int row = 0;
+        Directions verticalDirection = new Directions();
+        Directions horizontalDirection = new Directions();
+        verticalDirection.Next();
+        
+        while (counter < _sizeX * _sizeY)
+        {
+            _array[row, col] = value++;
+            if((col == colEnd && row == rowStart) || (col == colEnd && row == rowEnd) || (row == rowEnd && col == colStart) || (_array[row + verticalDirection.Current, col + horizontalDirection.Current] != 0))
+            {
+                verticalDirection.Next();
+                horizontalDirection.Next();
+            }
+            row += verticalDirection.Current;
+            col += horizontalDirection.Current;
+            counter++;
         }
     }
     public override bool Equals(object? obj)
