@@ -18,7 +18,7 @@ public class Pixel
     }
 
     private int _color;
-    private const int MAX_COLOR = 4;
+    private const int MAX_COLOR = 16;
     public int Color
     {
         get { return _color; }

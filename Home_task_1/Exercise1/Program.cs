@@ -1,11 +1,4 @@
-﻿using System.Text;
-using Exercise1;
-using Microsoft.VisualBasic;
+﻿using Exercise1;
 
-SpiralSnakeArray snakeArray = new SpiralSnakeArray(3, 4);
-snakeArray.CreateSnake();
-Console.WriteLine(snakeArray.ToString());
-SpiralSnakeArray secondVariatArray = new SpiralSnakeArray();
-secondVariatArray.SecondVariantCreateSnake();
-Console.WriteLine("=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
-Console.WriteLine(secondVariatArray.ToString());
+SpiralSnakeArray secondSnakeArray = new SpiralSnakeArray(5,8);
+Console.WriteLine(secondSnakeArray.ToString());
