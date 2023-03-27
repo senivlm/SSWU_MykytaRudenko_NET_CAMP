@@ -57,22 +57,21 @@ public class ColorizedArray
                     tempLine.Add(currentPixel);
                     continue;
                 }
-                if (tempLine.Count > longestLine.Count)
-                { 
-                    longestLine = new List<Pixel>(tempLine);
-                }
+                LenghtComparison(ref tempLine, ref longestLine);
                 tempLine.Clear(); 
                 tempLine.Add(currentPixel);
             }
+            LenghtComparison(ref tempLine, ref longestLine);
             tempLine.Clear();
         }
-
-        if (tempLine.Count > longestLine.Count)
-        {
-            longestLine = new List<Pixel>(tempLine);
-        }
-
         return longestLine;
+    }
+    private void LenghtComparison(ref List<Pixel> firstLine, ref List<Pixel> secondLine)
+    {
+        if (firstLine.Count > secondLine.Count)
+        {
+            secondLine = new List<Pixel>(firstLine);
+        }
     }
     public override string ToString()
     {
