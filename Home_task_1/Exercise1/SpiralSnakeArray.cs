@@ -8,10 +8,6 @@ public class SpiralSnakeArray
     private int _sizeY;
     private int[,] _array;
 
-    public int SizeX { get; }
-    public int SizeY { get; }
-    public int[,] Array { get; set; }
-
     public SpiralSnakeArray(int sizeY = 3, int sizeX = 4)
     {
         _sizeX = sizeX;
@@ -19,12 +15,10 @@ public class SpiralSnakeArray
         _array = new int[sizeY,sizeX];
         CreateSpiral();
     }
-    public void CreateSpiral()
+    private void CreateSpiral()
     {
         int value = 1;
         int counter = 0;
-        int rowEnd = _sizeY - 1;
-        int colEnd = _sizeX - 1;
         int col = 0;
         int row = 0;
         Directions verticalDirection = new Directions();
@@ -34,7 +28,7 @@ public class SpiralSnakeArray
         while (counter < _sizeX * _sizeY)
         {
             _array[row, col] = value++;
-            if((col == colEnd && row == 0) || (col == colEnd && row == rowEnd) || (row == rowEnd && col == 0) || (_array[row + verticalDirection.Current, col + horizontalDirection.Current] != 0))
+            if(CheckChangeDirection(row, col, row + verticalDirection.Current, col + horizontalDirection.Current))
             {
                 verticalDirection.Next();
                 horizontalDirection.Next();
@@ -44,6 +38,16 @@ public class SpiralSnakeArray
             counter++;
         }
     }
+
+    private bool CheckChangeDirection(int row, int col, int nextRow, int nextCol)
+    {
+        bool isBound = (col == _array.GetLength(1) - 1 && row == 0) ||
+                       (col == _array.GetLength(1) - 1 && row == _array.GetLength(0) - 1) ||
+                       (row == _array.GetLength(0) - 1 && col == 0);
+        if (isBound || _array[nextRow, nextCol] != 0) return true;
+        return false;
+    }
+    
     public override string ToString()
     {
         StringBuilder sb = new StringBuilder();

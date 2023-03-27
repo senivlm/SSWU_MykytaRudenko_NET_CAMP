@@ -8,10 +8,6 @@ public class ColorizedArray
     private int _sizeX;
     private int _sizeY;
     private Pixel[,] _array;
-
-    public int SizeX { get; }
-    public int SizeY { get; }
-    public Pixel[,] Array { get; set; }
     
     public ColorizedArray(int sizeY = 5, int sizeX = 8)
     {
@@ -31,7 +27,20 @@ public class ColorizedArray
             }
         }
     }
-
+    public string LongestLineAnalysis()
+    {
+        StringBuilder sb = new StringBuilder();
+        List<Pixel> longestLine = FindLongestLine();
+        int lineLenght = longestLine.Count;
+        Pixel firstLineElement = longestLine[0];
+        int lineColor = firstLineElement.Color;
+        sb.Append("Line color: " + lineColor + "\n");
+        sb.Append("First element indexes: " + firstLineElement.Y + ", " + firstLineElement.X + '\n');
+        Pixel lastLineElement = longestLine[lineLenght - 1];
+        sb.Append("Last element indexes: " + lastLineElement.Y + ", " + lastLineElement.X + '\n');
+        sb.Append("Lenght: " + lineLenght);
+        return sb.ToString();
+    }
     private List<Pixel> FindLongestLine()
     {
         List<Pixel> longestLine = new List<Pixel>();
@@ -61,21 +70,6 @@ public class ColorizedArray
             tempLine.Clear();
         }
         return longestLine;
-    }
-
-    public string LongestLineAnalysis()
-    {
-        StringBuilder sb = new StringBuilder();
-        List<Pixel> longestLine = FindLongestLine();
-        int lineLenght = longestLine.Count;
-        Pixel firstLineElement = longestLine[0];
-        int lineColor = firstLineElement.Color;
-        sb.Append("Line color: " + lineColor + "\n");
-        sb.Append("First element indexes: " + firstLineElement.Y + ", " + firstLineElement.X + '\n');
-        Pixel lastLineElement = longestLine[lineLenght - 1];
-        sb.Append("Last element indexes: " + lastLineElement.Y + ", " + lastLineElement.X + '\n');
-        sb.Append("Lenght: " + lineLenght);
-        return sb.ToString();
     }
     public override string ToString()
     {
