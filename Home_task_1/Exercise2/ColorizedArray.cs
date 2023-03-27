@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Text;
+﻿using System.Text;
 
 namespace Exercise2;
 
@@ -45,30 +44,34 @@ public class ColorizedArray
     {
         List<Pixel> longestLine = new List<Pixel>();
         List<Pixel> tempLine = new List<Pixel>();
-        for (int i = 0; i < _sizeY; i++)
+        for (int row = 0; row < _sizeY; row++)
         {
-            tempLine.Add(_array[i,0]);
-            for (int j = 1; j < _sizeX; j++)
+            tempLine.Add(_array[row, 0]);
+
+            for (int col = 1; col < _sizeX; col++)
             {
-                if(_array[i,j].Color != tempLine[0].Color)
+                Pixel currentPixel = _array[row, col];
+
+                if (currentPixel.Color == tempLine[0].Color)
                 {
-                    if (tempLine.Count > longestLine.Count)
-                    {
-                        longestLine = new List<Pixel>(tempLine);
-                    }
-                    tempLine.Clear();
-                    if (j + 1 != _array.GetLength(1))
-                    {
-                        tempLine.Add(_array[i,++j]);
-                    }
+                    tempLine.Add(currentPixel);
+                    continue;
                 }
-                else
-                {
-                    tempLine.Add(_array[i,j]);
+                if (tempLine.Count > longestLine.Count)
+                { 
+                    longestLine = new List<Pixel>(tempLine);
                 }
+                tempLine.Clear(); 
+                tempLine.Add(currentPixel);
             }
             tempLine.Clear();
         }
+
+        if (tempLine.Count > longestLine.Count)
+        {
+            longestLine = new List<Pixel>(tempLine);
+        }
+
         return longestLine;
     }
     public override string ToString()
